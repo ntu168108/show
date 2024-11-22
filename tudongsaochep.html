@@ -12,12 +12,17 @@
         h1 {
             color: #333;
         }
-        input {
-            padding: 10px;
+        button {
+            padding: 10px 20px;
             font-size: 16px;
-            width: 100%;
-            max-width: 300px;
-            margin-bottom: 20px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
         }
         p {
             color: green;
@@ -27,18 +32,19 @@
 </head>
 <body>
     <h1>Sao chép văn bản</h1>
-    <p>Nhập tên của bạn:</p>
-    <input type="text" id="nameInput" placeholder="Tên học sinh..." oninput="copyText()">
+    <p>Nhấn nút dưới đây để sao chép văn bản:</p>
+    <button onclick="copyText()">Sao chép văn bản</button>
     <p id="message"></p>
 
     <script>
         function copyText() {
-            const name = document.getElementById('nameInput').value;
-            if (name.trim() === "") {
-                document.getElementById('message').innerText = ""; // Xóa thông báo khi không có tên
-                return;
-            }
-            const textToCopy = `Kính gửi: Quý Thầy/Cô giáo, Quý phụ huynh và các em học sinh,\nBan tổ chức cuộc thi vẽ tranh "Sách tiếng Anh - Bức tranh muôn màu" đã nhận được Bài dự thi của học sinh ${name}.\n\nGiáo dục Phương Nam rất cảm ơn sự quan tâm và tham gia từ phía Nhà trường, Quý Thầy/Cô, sự ủng hộ từ phía phụ huynh và các em học sinh.\n\nCác thông tin chính thức về cuộc thi sẽ được cập nhật và đăng tải trên Fanpage SEDIDCO và website chính thức của công ty. Quý Thầy/Cô giáo, quý phụ huynh và các em học sinh có thể theo dõi các thông tin thường xuyên về cuộc thi và được giải đáp thắc mắc tại Fanpage SEDIDCO theo đường dẫn https://www.facebook.com/phuongnam.edu.vn\nTrân trọng thông báo./.`;
+            const textToCopy = `Kính gửi: Quý Thầy/Cô giáo, Quý phụ huynh và các em học sinh,
+
+Ban tổ chức cuộc thi vẽ tranh "Sách tiếng Anh - Bức tranh muôn màu" rất cảm ơn sự quan tâm và tham gia từ phía Nhà trường, Quý Thầy/Cô, sự ủng hộ từ phía phụ huynh và các em học sinh.
+
+Các thông tin chính thức về cuộc thi vẫn được cập nhật thường xuyên trên Fanpage SEDIDCO và website chính thức của công ty. Quý Thầy/Cô giáo, quý phụ huynh và các em học sinh có thể theo dõi các thông tin về cuộc thi và được giải đáp thắc mắc tại Fanpage SEDIDCO theo đường dẫn https://www.facebook.com/phuongnam.edu.vn
+
+Trân trọng thông báo./.`;
 
             // Tạo một phần tử textarea tạm thời để sao chép văn bản
             const textarea = document.createElement('textarea');
