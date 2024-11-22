@@ -6,34 +6,65 @@
     <title>Sao chép văn bản</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #007BFF;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000; /* Nền đen */
             color: white;
-            border: none;
-            border-radius: 5px;
+            font-family: Arial, sans-serif;
         }
+
+        button {
+            font-size: 3vw; /* Kích thước chữ dựa trên chiều rộng màn hình */
+            font-weight: bold;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1); /* Màu nền mờ */
+            border: 0.2vw solid rgba(255, 255, 255, 0.3); /* Đường viền mờ */
+            border-radius: 50%; /* Nút tròn */
+            width: 25%; /* Kích thước nút lớn hơn */
+            height: 25%; /* Giữ cân đối */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.8), 
+                0 0 20px rgba(255, 255, 255, 0.6), 
+                0 0 40px rgba(255, 255, 255, 0.4); /* Hiệu ứng phát sáng đẹp hơn */
+            text-shadow: 
+                0 0 5px rgba(255, 255, 255, 0.8), 
+                0 0 10px rgba(255, 255, 255, 0.6),
+                0 0 20px rgba(255, 255, 255, 0.4);
+            outline: none; /* Loại bỏ viền mặc định */
+            transition: all 0.3s ease-in-out; /* Hiệu ứng mượt khi hover */
+        }
+
         button:hover {
-            background-color: #0056b3;
+            background: rgba(255, 255, 255, 0.2); /* Đổi màu nền khi hover */
+            box-shadow: 
+                0 0 20px rgba(255, 255, 255, 1), 
+                0 0 40px rgba(255, 255, 255, 0.8), 
+                0 0 60px rgba(255, 255, 255, 0.6); /* Phát sáng mạnh hơn */
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 1), 
+                0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 30px rgba(255, 255, 255, 0.6);
         }
+
         p {
-            color: green;
-            margin-top: 10px;
+            position: absolute;
+            bottom: 5%;
+            font-size: 1.5vw;
+            color: #0f0; /* Hiển thị thông báo sao chép với màu neon */
         }
     </style>
 </head>
 <body>
-    <h1>Sao chép văn bản</h1>
-    <p>Nhấn nút dưới đây để sao chép văn bản:</p>
-    <button onclick="copyText()">Sao chép văn bản</button>
+    <button onclick="copyText()">Sao chép</button>
     <p id="message"></p>
 
     <script>
