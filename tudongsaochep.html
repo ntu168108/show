@@ -12,54 +12,83 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #000; /* Nền đen */
-            color: white;
-            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); /* Nền đậm chất cyberpunk */
+            color: #fff;
+            font-family: 'Orbitron', Arial, sans-serif; /* Font chữ phong cách tương lai */
+            overflow: hidden; /* Ẩn scroll nếu có */
         }
 
         button {
-            font-size: 3vw; /* Kích thước chữ dựa trên chiều rộng màn hình */
+            font-size: 3vw; /* Kích thước chữ lớn hơn */
             font-weight: bold;
             color: #fff;
-            background: rgba(255, 255, 255, 0.1); /* Màu nền mờ */
-            border: 0.2vw solid rgba(255, 255, 255, 0.3); /* Đường viền mờ */
-            border-radius: 50%; /* Nút tròn */
-            width: 25%; /* Kích thước nút lớn hơn */
-            height: 25%; /* Giữ cân đối */
+            background: linear-gradient(90deg, #ff0099, #493240); /* Hiệu ứng gradient neon */
+            border: 0.3vw solid rgba(255, 255, 255, 0.5); /* Đường viền neon */
+            border-radius: 20px; /* Nút góc bo mềm */
+            width: 40%; /* Kích thước nút lớn hơn */
+            height: auto; /* Giữ cân đối */
+            padding: 25px;
             display: flex;
             justify-content: center;
             align-items: center;
             text-transform: uppercase;
             cursor: pointer;
             box-shadow: 
-                0 0 10px rgba(255, 255, 255, 0.8), 
-                0 0 20px rgba(255, 255, 255, 0.6), 
-                0 0 40px rgba(255, 255, 255, 0.4); /* Hiệu ứng phát sáng đẹp hơn */
+                0 0 20px #ff0099, 
+                0 0 40px #ff0099, 
+                0 0 60px rgba(255, 0, 153, 0.7); /* Hiệu ứng phát sáng neon */
             text-shadow: 
-                0 0 5px rgba(255, 255, 255, 0.8), 
-                0 0 10px rgba(255, 255, 255, 0.6),
-                0 0 20px rgba(255, 255, 255, 0.4);
+                0 0 10px #ff0099, 
+                0 0 20px #ff0099,
+                0 0 30px rgba(255, 0, 153, 0.7);
             outline: none; /* Loại bỏ viền mặc định */
-            transition: all 0.3s ease-in-out; /* Hiệu ứng mượt khi hover */
+            transition: all 0.4s ease-in-out; /* Hiệu ứng mượt khi hover */
         }
 
         button:hover {
-            background: rgba(255, 255, 255, 0.2); /* Đổi màu nền khi hover */
+            background: linear-gradient(90deg, #00ff99, #001f3f); /* Đổi màu gradient khi hover */
             box-shadow: 
-                0 0 20px rgba(255, 255, 255, 1), 
-                0 0 40px rgba(255, 255, 255, 0.8), 
-                0 0 60px rgba(255, 255, 255, 0.6); /* Phát sáng mạnh hơn */
+                0 0 30px #00ff99, 
+                0 0 50px #00ff99, 
+                0 0 70px rgba(0, 255, 153, 0.9); /* Phát sáng mạnh hơn */
             text-shadow: 
-                0 0 10px rgba(255, 255, 255, 1), 
-                0 0 20px rgba(255, 255, 255, 0.8),
-                0 0 30px rgba(255, 255, 255, 0.6);
+                0 0 15px #00ff99, 
+                0 0 30px #00ff99,
+                0 0 45px rgba(0, 255, 153, 0.9);
         }
 
         p {
             position: absolute;
-            bottom: 5%;
+            bottom: 10%;
             font-size: 1.5vw;
-            color: #0f0; /* Hiển thị thông báo sao chép với màu neon */
+            color: #0ff; /* Màu neon xanh dương */
+            text-shadow: 
+                0 0 5px #0ff, 
+                0 0 10px #0ff, 
+                0 0 20px rgba(0, 255, 255, 0.7); /* Hiệu ứng phát sáng */
+            font-family: 'Orbitron', Arial, sans-serif; /* Font chữ tương lai */
+            animation: pulse 2s infinite; /* Hiệu ứng nhấp nháy nhẹ */
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px #ff0099; }
+            50% { box-shadow: 0 0 40px #00ff99; }
+            100% { box-shadow: 0 0 20px #ff0099; }
+        }
+
+        button:hover {
+            animation: glow 2s infinite alternate; /* Thêm hiệu ứng phát sáng nhấp nháy */
         }
     </style>
 </head>
