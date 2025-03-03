@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CS2 Server Info</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+      max-width: 1200px;
+      margin: auto;
+    }
+    h1, h2, h3 {
+      color: #ffa500;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .container {
+      width: 100%;
+      background-color: #2c2c2c;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 12px;
+      text-align: center;
+    }
+    th {
+      background-color: #ffa500;
+      color: #1a1a1a;
+      text-transform: uppercase;
+    }
+    tr:nth-child(even) {
+      background-color: #333;
+    }
+    button {
+      background-color: #ffa500;
+      color: #1a1a1a;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: background-color 0.3s, transform 0.2s;
+      margin-right: 10px;
+    }
+    button:hover {
+      background-color: #ff7f00;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>CS2 Server Info</h1>
+    <div id="info">Đang tải thông tin...</div>
+    <button id="connectButton" style="display: none;">🔗 Kết nối tới Server</button>
+    <button id="copyIpButton">📋 Sao chép IP</button>
+    <script>
+      document.getElementById("copyIpButton").onclick = () => {
+        const ip = "171.227.65.1:27015";
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(ip)
+            .then(() => {
+              console.log("Đã sao chép IP thành công!");
+            })
+            .catch(err => {
+              console.error("Lỗi sao chép:", err);
+              alert("Không thể sao chép tự động. Vui lòng sao chép thủ công: " + ip);
+            });
+        } else {
+          alert("Trình duyệt của bạn không hỗ trợ sao chép tự động. Hãy sao chép thủ công: " + ip);
+        }
+      };
+    </script>
+    
+  </div>
+
+  <div class="container">
+    <h2>Hướng Dẫn Dùng Lệnh trong Server</h2>
+    <table>
+      <tr>
+        <th>Lệnh</th>
+        <th>Chức năng</th>
+        <th>Hướng dẫn sử dụng</th>
+      </tr>
+      <tr>
+        <td>Mở chat</td>
+        <td>Để nhập lệnh</td>
+        <td>Nhấn "Y" hoặc "U"</td>
+      </tr>
+      <tr>
+        <td>!gun</td>
+        <td>Chọn súng</td>
+        <td>Dùng W, A, S, D để di chuyển. Nhấn Space để chọn. Nhấn Tab để tắt bảng.</td>
+      </tr>
+      <tr>
+        <td>!mode</td>
+        <td>Chọn chế độ chơi</td>
+        <td>Chọn Solo súng trường hoặc Solo AWP. Khi chọn AWP, tắt súng trường để tránh nhảy ngẫu nhiên.(chọn solo súng trường cũng vậy)</td>
+      </tr>
+      <tr>
+        <td>!solo &lt;tên người chơi&gt;</td>
+        <td>Mời solo</td>
+        <td>Gửi lời mời solo tới người chơi nhất định khi server đông người.</td>
+      </tr>
+      <tr>
+        <td>!gakeo &lt;tên người chơi&gt;</td>
+        <td>Mời solo (tương tự !solo)</td>
+        <td>Gửi lời mời solo tới người chơi nhất định khi server đông người.</td>
+      </tr>
+      <tr>
+        <td>!ok</td>
+        <td>Chấp nhận solo</td>
+        <td>Đồng ý với lời mời solo từ người gửi.</td>
+      </tr>
+      <tr>
+        <td>!no</td>
+        <td>Từ chối solo</td>
+        <td>Từ chối lời mời solo solo từ người gửi.</td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    // Địa chỉ IP Public cố định
+    const serverIP = "171.227.65.1:27015";
+    // Đường dẫn API (sử dụng IP public backend nếu cần)
+    const apiUrl = "http://171.227.65.1:5000/api/server_info";
+
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        const infoDiv = document.getElementById("info");
+
+        if (data.error) {
+          infoDiv.innerHTML = `<p class="error">Lỗi: ${data.error}</p>`;
+          return;
+        }
+
+        if (!data.map) {
+          infoDiv.innerHTML = `<p class="error">Lỗi: Không có dữ liệu bản đồ (map)</p>`;
+          return;
+        }
+
+        if (data.players_online == 0) {
+          infoDiv.innerHTML = `
+            <h2>Tên Server: ${data.server_name || "Unknown"}</h2>
+            <p>Map: ${data.map || "Unknown"}</p>
+            <p>Số người chơi: 0 / ${data.total_players || 0}</p>
+            <div class="status-bar">Không có người chơi online</div>
+          `;
+        } else {
+          infoDiv.innerHTML = `
+            <h2>Tên Server: ${data.server_name || "Unknown"}</h2>
+            <p>Map: ${data.map || "Unknown"}</p>
+            <p>Số người chơi: ${data.players_online || 0} / ${data.total_players || 0}</p>
+            <h3>Danh sách người chơi:</h3>
+            <ul>
+              ${data.players.map(player => {
+                // Loại bỏ IP và port nếu có, chỉ lấy tên người chơi
+                let cleanPlayer = player.replace(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d+\s*/, "").trim();
+                return `<li>${cleanPlayer || "Người chơi ẩn danh"}</li>`;
+              }).join('')}
+            </ul>
+          `;
+        }
+
+        // Hiển thị nút "Kết nối tới Server"
+        const connectButton = document.getElementById("connectButton");
+        connectButton.style.display = "block";
+        connectButton.onclick = () => {
+          window.location.href = `steam://connect/${serverIP}`;
+        };
+      })
+      .catch(error => {
+        console.error("Lỗi gọi API:", error);
+        document.getElementById("info").innerHTML = `<p class="error">Không thể kết nối đến API</p>`;
+      });
+
+  </script>
+</body>
+</html>
