@@ -74,7 +74,7 @@
     <button id="copyIpButton">📋 Sao chép IP</button>
     <script>
       document.getElementById("copyIpButton").onclick = () => {
-        const ip = "171.227.65.1:27015";
+        const ip = "connect 171.252.34.52:27015";
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(ip)
             .then(() => {
@@ -140,7 +140,7 @@
 
   <script>
     // Địa chỉ IP Public cố định
-    const serverIP = "171.227.65.1:27015";
+    const serverIP = "171.252.34.52:27015";
     // Đường dẫn API (sử dụng IP public backend nếu cần)
     const apiUrl = "https://cs2web.onrender.com/api/server_info";
 
